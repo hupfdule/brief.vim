@@ -24,6 +24,28 @@ set cpo&vim
 
 " END Folding ============================================================ }}}
 
+" Completion ============================================================= {{{
+
+  setlocal omnifunc=brief#completion#omnicomplete
+
+" END Completion ========================================================= }}}
+"
+" Text objects =========================================================== {{{
+
+  " inside section (starting with dot)
+  xnoremap <buffer> <silent> i. :call mytexobjfun()<cr>
+  omap <buffer> <silent> i. :normal Vi.<CR>
+  " a section (starting with dot)
+  xnoremap <buffer> <silent> a. :call mytexobjfun()<cr>
+  omap <buffer> <silent> a. :normal Va.<CR>
+  " inside markup section
+  xnoremap <buffer> <silent> im :call mytexobjfun()<cr>
+  omap <buffer> <silent> im :normal Vim<CR>
+  " a markup section
+  xnoremap <buffer> <silent> am :call mytexobjfun()<cr>
+  omap <buffer> <silent> am :normal Vam<CR>
+
+" END Text objects ======================================================= }}}
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
