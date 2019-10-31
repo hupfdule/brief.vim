@@ -17,6 +17,13 @@ function! brief#textobjects#section(around) abort "{{{1
   let l:next_section_header = search(s:section_header_pattern, 'Wn')
   " FIXME: What to do if either prev or next cannot be found?
 
+  " if no previous header exists, this is not a section
+  if l:prev_section_header ==# 0
+    " FIXME: Why did the cursor move to the start of the line?
+    echohl ErrorMsg | echo "Not inside a section" | echohl None
+    return
+  endif
+
   if a:around
     let l:start = l:prev_section_header
     let l:end = l:next_section_header - 1
