@@ -67,7 +67,6 @@ function! brief#textobjects#markup_section(around) abort "{{{1
 
   " Stop if we are not inside a markup section
   if l:opening_delimiter ==# 0 || l:closing_delimiter ==# 0 || l:opening_delimiter < l:prev_closing_delimiter
-    " FIXME: Why did the cursor move to the start of the line?
     echohl ErrorMsg | echo "Not inside a markup section" | echohl None
     return
   endif

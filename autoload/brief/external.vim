@@ -21,6 +21,10 @@ function! brief#external#list_senders() abort
   " TODO: To be usable for omni-completion this should also return some
   "       context like:
   "       - the actual fields for this address for the preview window
+  "       BUT: How to display that in a balloon? It doesn't make much sense
+  "       to use the preview here, because that would remain on screen
+  "       after completion. We only need this info while selecting in the
+  "       omni-complete menu.
   let senders = systemlist('/home/mherrn/projekte/brief3/brief list-senders')
   return senders
 endfunction

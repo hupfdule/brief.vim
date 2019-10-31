@@ -12,8 +12,6 @@ syntax keyword briefSectionName TEMPLATE FROM TO POSTAL DATE SUBJECT OPENING CON
 " FIXME: This should only highlight correct sectionKeywords
 syntax match   briefSection /\v\C^\.[A-Z]+\s*$/
 syntax match   briefSectionMarkup /\v\C^\.[a-z]+\s*$/
-" TODO: Display the _content_ of the markup block (and possibly the content
-" of the section with custom markup in that language
 " TODO: Set default highlight for blocks to latex?
 syntax region  briefMarkupBlock start=/\v\C^\.[a-z]+\-+\s*$/ end=/\v\C^\-{2,}\s*$/
 syntax match   briefComment /\v\C^#.*/
