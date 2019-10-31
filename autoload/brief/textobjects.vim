@@ -15,13 +15,17 @@ let s:markup_section_end_pattern   = '\v\C^\-{2,}\s*$'
 function! brief#textobjects#section(around) abort "{{{1
   let l:prev_section_header = search(s:section_header_pattern, 'Wbcn')
   let l:next_section_header = search(s:section_header_pattern, 'Wn')
-  " FIXME: What to do if either prev or next cannot be found?
 
   " if no previous header exists, this is not a section
   if l:prev_section_header ==# 0
     " FIXME: Why did the cursor move to the start of the line?
     echohl ErrorMsg | echo "Not inside a section" | echohl None
     return
+  endif
+
+  " if there is no next section header, this section ends at the end of file
+  if l:next_section_header ==# 0
+    let l:next_section_header = line('$') + 1
   endif
 
   if a:around
@@ -58,15 +62,18 @@ endfunction "}}}1
 "        0: inside markup section
 "        1: a markup section
 function! brief#textobjects#markup_section(around) abort "{{{1
-  " FIXME: This is still broken. Neither 'im' nor 'am' work correctly.
-  " FIXME: How to make sure that we actually are _inside_ a markup section?
-  " Search backward for an end delimiter and if it es after the start, we
-  " are outside of the block?
   let l:opening_delimiter = search(s:markup_section_start_pattern, 'Wbcn')
   let l:closing_delimiter = search(s:markup_section_end_pattern, 'Wcn')
-  " FIXME: What to do if either prev or next cannot be found?
+  " Search also for the previous end delimiter to check whether we are
+  " really _inside_ a markup sectin
+  let l:prev_closing_delimiter = search(s:markup_section_end_pattern, 'Wbcn')
 
-  echom l:opening_delimiter . ' -> ' . l:closing_delimiter
+  " Stop if we are not inside a markup section
+  if l:opening_delimiter ==# 0 || l:closing_delimiter ==# 0 || l:opening_delimiter < l:prev_closing_delimiter
+    " FIXME: Why did the cursor move to the start of the line?
+    echohl ErrorMsg | echo "Not inside a markup section" | echohl None
+    return
+  endif
 
   if a:around
     let l:start = l:opening_delimiter
