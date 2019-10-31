@@ -15,7 +15,7 @@ syntax match   briefSectionMarkup /\v\C^\.[a-z]+\s*$/
 " TODO: Display the _content_ of the markup block (and possibly the content
 " of the section with custom markup in that language
 " TODO: Set default highlight for blocks to latex?
-syntax region  briefMarkupBlock start=/\v\C^\.[a-z]+\-+\s*$/ end=/\v\C\-{2,}\s*$/
+syntax region  briefMarkupBlock start=/\v\C^\.[a-z]+\-+\s*$/ end=/\v\C^\-{2,}\s*$/
 syntax match   briefComment /\v\C^#.*/
 
 
@@ -32,7 +32,7 @@ for s:type in g:brief_fenced_languages
   " …
   " .NEXT_SECTION
   " FIXME: This doesn't work
-  exe 'syn region ' . s:type . 'Region matchgroup=briefMarkupFence start=/\v\C^\.[A-Z]+\s*\n\zs\.' . s:type . '\s*$/ keepend end=/\v\C^\ze\.[A-Z]*\s*$/ contains=@' . s:type . 'Markup' 
+  exe 'syn region ' . s:type . 'Region matchgroup=briefMarkupFence start=/\v\C^\.[A-Z]+\s*\n\zs\.' . s:type . '\s*$/ keepend end=/\v\C^\ze\.[A-Z]*\s*$/ contains=@' . s:type . 'Markup'
 
   " block markup
   " .md-

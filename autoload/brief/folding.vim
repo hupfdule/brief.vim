@@ -8,7 +8,7 @@ function! brief#folding#foldexpr(lnum)
     elseif l0 =~# '\v\C^\.[a-z]+\-+\s*$'
       " markup section start
       return 'a1'
-    elseif l0 =~# '\v\C\-{2,}\s*$'
+    elseif l0 =~# '\v\C^\-{2,}\s*$'
       " markup section end
       return 's1'
     else

@@ -33,17 +33,17 @@ set cpo&vim
 " Text objects =========================================================== {{{
 
   " inside section (starting with dot)
-  xnoremap <buffer> <silent> i. :call mytexobjfun()<cr>
-  omap <buffer> <silent> i. :normal Vi.<CR>
+  xnoremap <buffer>  i. :call brief#textobjects#section(0)<cr>
+  omap <buffer>  i. :normal Vi.<CR>
   " a section (starting with dot)
-  xnoremap <buffer> <silent> a. :call mytexobjfun()<cr>
-  omap <buffer> <silent> a. :normal Va.<CR>
+  xnoremap <buffer>  a. :call brief#textobjects#section(1)<cr>
+  omap <buffer>  a. :normal Va.<CR>
   " inside markup section
-  xnoremap <buffer> <silent> im :call mytexobjfun()<cr>
-  omap <buffer> <silent> im :normal Vim<CR>
+  xnoremap <buffer>  im :call brief#textobjects#markup_section(0)<cr>
+  omap <buffer>  im :normal Vim<CR>
   " a markup section
-  xnoremap <buffer> <silent> am :call mytexobjfun()<cr>
-  omap <buffer> <silent> am :normal Vam<CR>
+  xnoremap <buffer>  am :call brief#textobjects#markup_section(1)<cr>
+  omap <buffer>  am :normal Vam<CR>
 
 " END Text objects ======================================================= }}}
 
