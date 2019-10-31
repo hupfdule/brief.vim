@@ -2,8 +2,7 @@ let s:section_header_pattern       = '\v\C^\.[A-Z]+\s*$'
 let s:markup_section_start_pattern = '\v\C^\.[a-z]+\-+\s*$'
 let s:markup_section_end_pattern   = '\v\C^\-{2,}\s*$'
 
-"" {{{2
-" Textobject for a brief section.
+"" Textobject for a brief section. {{{2
 "
 " Depending of parameter {around} it may select only the content of the
 " current section or the whole section with section header and trailing
@@ -51,8 +50,7 @@ function! brief#textobjects#section(around) abort "{{{1
   normal! $
 endfunction "}}}1
 
-"" {{{2
-" Textobject for a markup section.
+"" Textobject for a markup section. {{{2
 "
 " Depending of parameter {around} it may select only the content of the
 " current markup section or the whole markup section with surrounding

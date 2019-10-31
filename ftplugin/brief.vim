@@ -29,7 +29,16 @@ set cpo&vim
   setlocal omnifunc=brief#completion#omnicomplete
 
 " END Completion ========================================================= }}}
-"
+
+" Motions ================================================================ {{{
+
+  nnoremap <buffer> ]] :call brief#motions#jump_to_section(1, 0)<cr>
+  nnoremap <buffer> ][ :call brief#motions#jump_to_section(1, 1)<cr>
+  nnoremap <buffer> [[ :call brief#motions#jump_to_section(0, 0)<cr>
+  nnoremap <buffer> [] :call brief#motions#jump_to_section(0, 1)<cr>
+
+" END Motions ============================================================ }}}
+
 " Text objects =========================================================== {{{
 
   " inside section (starting with dot)
