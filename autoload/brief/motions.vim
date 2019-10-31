@@ -53,5 +53,19 @@ endfunction
 "               0 == jump to the beginning of the markup block
 "               1 == jump to the end of the markup block
 function! brief#motions#jump_to_markup_block(next, to_end) abort
+  if (a:next)
+    let l:search_flags = 'Wn'
+  else
+    let l:search_flags = 'Wbn'
+  endif
 
+  if (a:to_end)
+    let l:search_pattern = s:markup_section_end_pattern
+  else
+    let l:search_pattern = s:markup_section_start_pattern
+  endif
+
+  let l:target_line = search(l:search_pattern, l:search_flags)
+
+  call cursor(l:target_line, 0)
 endfunction

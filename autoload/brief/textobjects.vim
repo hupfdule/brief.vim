@@ -17,7 +17,6 @@ function! brief#textobjects#section(around) abort "{{{1
 
   " if no previous header exists, this is not a section
   if l:prev_section_header ==# 0
-    " FIXME: Why did the cursor move to the start of the line?
     echohl ErrorMsg | echo "Not inside a section" | echohl None
     return
   endif

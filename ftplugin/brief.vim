@@ -32,27 +32,35 @@ set cpo&vim
 
 " Motions ================================================================ {{{
 
+  " Section movement
+  " TODO: xmap and omap
   nnoremap <buffer> ]] :call brief#motions#jump_to_section(1, 0)<cr>
   nnoremap <buffer> ][ :call brief#motions#jump_to_section(1, 1)<cr>
   nnoremap <buffer> [[ :call brief#motions#jump_to_section(0, 0)<cr>
   nnoremap <buffer> [] :call brief#motions#jump_to_section(0, 1)<cr>
+
+  " Markup block movement
+  nnoremap <buffer> ]} :call brief#motions#jump_to_markup_block(1, 0)<cr>
+  nnoremap <buffer> ]{ :call brief#motions#jump_to_markup_block(1, 1)<cr>
+  nnoremap <buffer> [{ :call brief#motions#jump_to_markup_block(0, 0)<cr>
+  nnoremap <buffer> [} :call brief#motions#jump_to_markup_block(0, 1)<cr>
 
 " END Motions ============================================================ }}}
 
 " Text objects =========================================================== {{{
 
   " inside section (starting with dot)
-  xnoremap <buffer>  i. :call brief#textobjects#section(0)<cr>
-  omap <buffer>  i. :normal Vi.<CR>
+  xnoremap <buffer>  i. :<c-u>call brief#textobjects#section(0)<cr>
+  omap     <buffer>  i. :normal Vi.<CR>
   " a section (starting with dot)
-  xnoremap <buffer>  a. :call brief#textobjects#section(1)<cr>
-  omap <buffer>  a. :normal Va.<CR>
+  xnoremap <buffer>  a. :<c-u>call brief#textobjects#section(1)<cr>
+  omap     <buffer>  a. :normal Va.<CR>
   " inside markup section
-  xnoremap <buffer>  im :call brief#textobjects#markup_section(0)<cr>
-  omap <buffer>  im :normal Vim<CR>
+  xnoremap <buffer>  im :<c-u>call brief#textobjects#markup_section(0)<cr>
+  omap     <buffer>  im :normal Vim<CR>
   " a markup section
-  xnoremap <buffer>  am :call brief#textobjects#markup_section(1)<cr>
-  omap <buffer>  am :normal Vam<CR>
+  xnoremap <buffer>  am :<c-u>call brief#textobjects#markup_section(1)<cr>
+  omap     <buffer>  am :normal Vam<CR>
 
 " END Text objects ======================================================= }}}
 
