@@ -8,6 +8,11 @@ if exists("b:current_syntax")
   finish
 endif
 
+" Load the tex syntax file to have proper syntax highlighting for TeX.
+" The remaining content here is our brief specific syntax elements and some
+" special chars that we handle differently than pure LaTeX.
+runtime syntax/tex.vim
+
 syntax keyword briefSectionName TEMPLATE FROM TO POSTAL DATE SUBJECT OPENING CONTENT CLOSING ENCLOSURES
 " FIXME: This should only highlight correct sectionKeywords
 syntax match   briefSection /\v\C^\.[A-Z]+\s*$/
@@ -48,6 +53,10 @@ hi def link briefSection        Title
 hi def link briefSectionMarkup  Identifier
 hi def link briefMarkupBlock    Identifier
 hi def link briefMarkupFence    Comment
+
+" TODO: Here we can redefine some syntax elements that would be illegal in
+" Tex, but are allowed in brief (like underscores, carets, etc.)
+hi link texOnlyMath         Identifier
 
 let b:current_syntax = "brief"
 ""if main_syntax ==# 'brief'

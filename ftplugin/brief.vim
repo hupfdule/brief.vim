@@ -3,7 +3,7 @@
 " Maintainer:   Marco Herrn <marco@mherrn.de>
 " Last Changed: 29. October 2019
 " URL:          http://github.com/hupfdule/brief.vim
-" License:      MIT?
+" License:      MIT
 
 if exists("b:did_ftplugin")
   finish
@@ -63,6 +63,53 @@ set cpo&vim
   omap     <buffer>  am :normal Vam<CR>
 
 " END Text objects ======================================================= }}}
+
+" Commands =============================================================== {{{
+
+  command! -buffer -nargs=? BriefToday           :call brief#helpers#set_today(<f-args>)
+  " TODO: Provide default mapping? (nmap, imap)
+
+  " TODO: Differentiate:
+  "       - new empty
+  "       - new, using current file as template
+  "       - new, using specified file as template
+  "       - new, prefill tex-template
+  "       Possible workflow:
+  "         - Open vim (empty)
+  "         - get list of existing .brf files                 :call brief#external#list_brf_documents()
+  "         - filter that list (FZF, clap, builtin)           :fzf funct, completeopt
+  "         - selectign 1 file to use as template
+  "         - automatically fill the buffer with that content :call brief#external#create_from_template(brf_template)
+  "         Questions:
+  "           - Can I use FZF for completing command arguments?
+  "             I expect that I then need to define a cmap to call FZF
+  command! -buffer -nargs=? BriefNew             :call brief#helpers#create_new(<f-args>)
+
+  " TODO: Differentate:
+  "       - no arg: Provide selectoin menu
+  "       - with arg: set the specified one
+  "       NO! Better use omnicompletion:
+  "         - Jump to section .TEMPLATE
+  "         - Jump to existing entry or start of next line
+  "         - Open omnicompletion-menu
+  "         - Jump back? May not be possible when omnicompletion still has
+  "           to be processed.
+  command! -buffer          BriefSwitchTemplate  :call brief#helpers#switch_template(<f-args>)<cr>
+
+  " TODO: See above
+  command! -buffer          BriefSwitchFrom      :call brief#helpers#switch_from(<f-args>)<cr>
+
+  " TODO: Provide selection menu for opening existing .brf file
+  "       - via FZF / vim-clap would be nice
+  "       - but should also work without them
+  "       Provide selection menu for selecting template .brf file for new .brf
+
+  " TODO: What arguments will those commands get?
+  command! -buffer          BriefTex             :call brief#external#tex(<f-args>)<cr>
+  command! -buffer          BriefPdf             :call brief#external#pdf(<f-args>)<cr>
+  command! -buffer          BriefPreview         :call brief#external#preview(<f-args>)<cr>
+
+" END Commands =========================================================== }}}
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
