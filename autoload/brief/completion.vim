@@ -1,8 +1,8 @@
-"" {{{2
+""
 " Omnifunc for finding possible template names or sender ids.
 "
 " See ':h complete-functions'
-function! brief#completion#omnicomplete(findstart, base) abort "{{{1
+function! brief#completion#omnicomplete(findstart, base) abort
   if a:findstart
     " Find start of completion item
     " This checks whether the current line is the content line of either
@@ -30,9 +30,9 @@ function! brief#completion#omnicomplete(findstart, base) abort "{{{1
       echohl ErrorMsg | echo 'Invalid completion type: ' . b:completion_type | echohl None
     endif
   endif
-endfunction "}}}1
+endfunction
 
-"" {{{2
+""
 " Change the content of the given section.
 "
 " This removes any existing content or insert a new line below the section
@@ -42,7 +42,7 @@ endfunction "}}}1
 "
 " @param {section} the section to change. Must include the full section
 " header (including the leading dot).
-function! brief#completion#change_section(section) abort "{{{1
+function! brief#completion#change_section(section) abort
   let l:cur_pos = getpos('.')
   call cursor(1, 1)
   if a:section ==# '.TEMPLATE' || a:section ==# '.FROM'
@@ -71,15 +71,15 @@ function! brief#completion#change_section(section) abort "{{{1
   else
     echohl ErrorMsg | echo "Invalid section for completion: " . a:section | echohl None
   endif
-endfunction "}}}1
+endfunction
 
-"" {{{2
+""
 " Return the previous line that is not empty and not a comment.
 "
 " @param  {cur_line} the line number of the line from which to search the previous line
 " @return the content of the found previous line or an empty string if no
 "         such line could be found
-function! s:get_prev_line(cur_line) abort "{{{1
+function! s:get_prev_line(cur_line) abort
   let l:line = a:cur_line
   while l:line > 0
     let l:line -= 1
@@ -89,6 +89,4 @@ function! s:get_prev_line(cur_line) abort "{{{1
   endwhile
 
   return ""
-endfunction "}}}1
-
-" vim: set foldmethod=marker :
+endfunction
